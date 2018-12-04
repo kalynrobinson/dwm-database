@@ -24,7 +24,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "docz:dev": "docz dev",
+        "docz:build": "docz build"
     },
     "husky": {
         "hooks": {
@@ -47,6 +49,7 @@
         "not op_mini all"
     ],
     "devDependencies": {
+        "docz": "^0.12.15",
         "husky": "^1.2.0",
         "lint-staged": "^8.1.0",
         "prettier": "^1.15.3"
