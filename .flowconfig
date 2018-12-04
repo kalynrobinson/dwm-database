@@ -1,0 +1,17 @@
+[ignore]
+.docz/*
+.*/.cache/.*
+.*/dist/.*
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=src
+all=true
+
+[strict]
