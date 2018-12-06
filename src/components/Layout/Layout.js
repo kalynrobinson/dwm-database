@@ -1,30 +1,35 @@
-import React, { Component } from "react"
-import { BackTop, Layout as AntLayout, Menu, Icon } from "antd"
-import "antd/dist/antd.css"
-import { Link } from "react-router-dom"
+import React, { Component } from "react";
+import { BackTop, Layout as AntLayout, Menu, Icon } from "antd";
+import "antd/dist/antd.css";
+import { Link } from "react-router-dom";
 
-import Breadcrumbs from "./Breadcrumbs"
-import "./Layout.css"
+import Breadcrumbs from "./Breadcrumbs";
+import "./Layout.css";
 
-const { Content, Footer, Sider } = AntLayout
+const { Content, Footer, Sider } = AntLayout;
 
 type Props = {
+    children: React.ChildrenArray<React.Element>,
+    location: $FlowTODO,
+};
+
+type State = {
     /** Sidebar's collapsed state */
     collapsed: boolean,
-}
+};
 
-class Layout extends Component<Props> {
-    state = {
+class Layout extends Component<Props, State> {
+    state: State = {
         collapsed: false,
-    }
+    };
 
     onCollapse = (collapsed) => {
-        this.setState({ collapsed })
-    }
+        this.setState({ collapsed });
+    };
 
     render() {
-        const { children } = this.props
-        const { collapsed } = this.state
+        const { children, location } = this.props;
+        const { collapsed } = this.state;
 
         /** @todo Replace inline styles */
         return (
@@ -38,6 +43,7 @@ class Layout extends Component<Props> {
                         height: "100vh",
                         position: "fixed",
                         left: 0,
+                        zIndex: 2,
                     }}
                 >
                     <div
@@ -48,26 +54,30 @@ class Layout extends Component<Props> {
                         }}
                     />
 
-                    <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-                        <Menu.Item key="1">
+                    <Menu
+                        theme="dark"
+                        selectedKeys={[location.pathname]}
+                        mode="inline"
+                    >
+                        <Menu.Item key="/breeds">
                             <Link to="/breeds">
                                 <Icon type="crown" />
                                 <span>Monsters</span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="2">
+                        <Menu.Item key="/families">
                             <Link to="/families">
                                 <Icon type="book" />
                                 <span>Families</span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="3">
+                        <Menu.Item key="/skills">
                             <Link to="/skills">
                                 <Icon type="fire" />
                                 <span>Skills</span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="4">
+                        <Menu.Item key="/calc">
                             <Link to="/calc">
                                 <Icon type="experiment" />
                                 <span>Breeding Calculator</span>
@@ -76,11 +86,18 @@ class Layout extends Component<Props> {
                     </Menu>
                 </Sider>
 
-                <AntLayout style={{ marginLeft: "200px", minHeight: "100vh" }}>
-                    <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
+                <AntLayout
+                    style={{
+                        marginLeft: collapsed ? "80px" : "200px",
+                        minHeight: "100vh",
+                    }}
+                >
+                    <Content
+                        style={{ margin: "24px 16px 0", overflow: "initial" }}
+                    >
                         <Breadcrumbs />
                         {children}
-                        <BackTop />
+                        <BackTop alt="Back to top" />
                     </Content>
                     <Footer className="text-center">
                         DWM Database ©2018 Created by Kalyn Robinson
@@ -89,8 +106,8 @@ class Layout extends Component<Props> {
                     </Footer>
                 </AntLayout>
             </AntLayout>
-        )
+        );
     }
 }
 
-export default Layout
+export default Layout;
