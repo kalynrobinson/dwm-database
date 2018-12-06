@@ -1,39 +1,93 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { Card, Table } from "antd"
+import React from "react";
+import { Link } from "react-router-dom";
+import { Card, Table } from "antd";
 
-const alphabetical = (a, b, key) => (key ? a[key].localeCompare(b[key]) : a.localeCompare(b))
+type Props = {
+    recipes: Recipe[],
+    /** Fallback for null offspring -- assume offspring is current monster */
+    monster: Monster,
+    /** Header text */
+    title: string,
+};
 
-const Recipes = ({ recipes, monster, title }) => (
-    <Card title={title} bordered={false} className="ant-card--growth">
-        <Table
-            dataSource={recipes}
-            pagination={false}
-            columns={[
-                {
-                    title: "Pedigree",
-                    dataIndex: "base",
-                    sorter: (a, b) => alphabetical(a, b, "base"),
-                    render: (base) => <Link to={`/breeds/${base}`}>{base}</Link>,
-                },
-                {
-                    title: "Mate",
-                    dataIndex: "mate",
-                    key: "mate",
-                    sorter: (a, b) => alphabetical(a, b, "mate"),
-                    render: (mate) => <Link to={`/breeds/${mate}`}>{mate}</Link>,
-                },
-                {
-                    title: "Offspring",
-                    dataIndex: "offspring",
-                    sorter: (a, b) => alphabetical(a, b, "offspring"),
-                    render: (offspring = monster.name) => <Link to={`/breeds/${offspring}`}>{offspring}</Link>,
-                },
-            ]}
-            size="medium"
-            rowKey={(record) => `${record.base}-${record.mate}`}
-        />
-    </Card>
-)
+type Filter = { text: string, value: string };
 
-export default Recipes
+/**
+ * Displays table of breeding recipes.
+ */
+const Recipes = ({ recipes, monster, title }: Props) => {
+    const baseFilters: Filter[] = recipesToFilters(recipes, "base");
+    const mateFilters: Filter[] = recipesToFilters(recipes, "mate");
+    const offspringFilters: Filter[] = recipesToFilters(
+        recipes,
+        "offspring",
+        monster.name,
+    );
+
+    return (
+        <Card title={title} bordered={false} className="ant-card--growth">
+            <Table
+                dataSource={recipes}
+                pagination={false}
+                columns={[
+                    {
+                        title: "Pedigree",
+                        dataIndex: "base",
+                        sorter: (a, b) => alphabetical(a, b, "base"),
+                        filters: baseFilters,
+                        onFilter: (value, record) => record.base === value,
+                        render: (value) => (
+                            <LinkCell value={value} name={monster.name} />
+                        ),
+                    },
+                    {
+                        title: "Mate",
+                        dataIndex: "mate",
+                        key: "mate",
+                        sorter: (a, b) => alphabetical(a, b, "mate"),
+                        filters: mateFilters,
+                        onFilter: (value, record) => record.mate === value,
+                        render: (value) => (
+                            <LinkCell value={value} name={monster.name} />
+                        ),
+                    },
+                    {
+                        title: "Offspring",
+                        dataIndex: "offspring",
+                        sorter: (a, b) => alphabetical(a, b, "offspring"),
+                        filters: offspringFilters,
+                        onFilter: (value, record) => record.offspring === value,
+                        render: (value) => (
+                            <LinkCell value={value} name={monster.name} />
+                        ),
+                    },
+                ]}
+                size="medium"
+                rowKey={(record) => `${record.base}-${record.mate}`}
+            />
+        </Card>
+    );
+};
+
+/**
+ * Doesn't show link if already viewing that monster
+ */
+const LinkCell = ({ value, name }: { value: strng, name: string }) =>
+    value === name ? value : <Link to={`/breeds/${value}`}>{value}</Link>;
+
+const alphabetical = (a, b, key) =>
+    key ? a[key].localeCompare(b[key]) : a.localeCompare(b);
+
+/**
+ * @param  {Recipe[]} recipes
+ * @param  {string}   key      - Property to map to, e.g. `base` or `mate`
+ * @param  {?string}  fallback - Value if `recipe[key]` is falsy
+ * @return {Filter[]}
+ */
+const recipesToFilters = (recipes: Recipe[], key: string, fallback: ?string) =>
+    // map objects to key first; otherwise Set won't de-duplicate property
+    [...new Set(recipes.map((record) => record[key] || fallback))]
+        .sort()
+        .map((id) => ({ text: id, value: id }));
+
+export default Recipes;
