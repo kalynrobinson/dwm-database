@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import Breadcrumbs from "./Breadcrumbs"
 import "./Layout.css"
 
-const { Header, Content, Footer, Sider } = AntLayout
+const { Content, Footer, Sider } = AntLayout
 
 type Props = {
     /** Sidebar's collapsed state */
@@ -47,6 +47,7 @@ class Layout extends Component<Props> {
                             margin: "16px",
                         }}
                     />
+
                     <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
                         <Menu.Item key="1">
                             <Link to="/breeds">

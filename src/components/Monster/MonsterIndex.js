@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-import { Table } from "antd"
+import { Table, Card } from "antd"
 
 import { FamilyAPI } from "api"
 import type { Monster } from "types"
@@ -52,7 +52,8 @@ class MonsterIndex extends Component<Props> {
 
         return (
             <div style={{ background: "#fff" }}>
-                <Table dataSource={monsters} columns={columns} />
+                <Table dataSource={monsters} columns={columns} rowKey="name" />
+                {/* monster index */}
             </div>
         )
     }

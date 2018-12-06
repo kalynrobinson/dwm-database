@@ -2,12 +2,18 @@ import React from "react"
 import { Card, Icon, Table, Tooltip } from "antd"
 
 import { StatAPI } from "api"
+import type { Monster } from "types"
 
 type DataEntry = { stat: string, value: number }
+type Props = { monster: Monster }
 
-const growthStats = ["Max LVL", "EXP", "HP", "MP", "ATK", "DEF", "AGI", "INT"]
+/** Stats that are "growth" stats, i.e. excluding SX, FL, and ME */
+const growthStats: string[] = ["Max LVL", "EXP", "HP", "MP", "ATK", "DEF", "AGI", "INT"]
 
-const GrowthRates = ({ monster }) => {
+/**
+ * Displays monster's max level and growth rates in a data table.
+ */
+const GrowthRates = ({ monster }: Props) => {
     const growthRates: DataEntry = Object.entries(monster.stats).reduce(
         (acc, [stat, value]) => (growthStats.indexOf(stat) >= 0 ? [...acc, { stat, value }] : acc),
         [],
@@ -32,7 +38,7 @@ const GrowthRates = ({ monster }) => {
 
     return (
         <Card title="Growth Rates" bordered={false} className="ant-card--hide-thead">
-            <Table dataSource={growthRates} pagination={false} columns={columns} size="medium" />
+            <Table dataSource={growthRates} pagination={false} columns={columns} size="medium" rowKey="stat" />
         </Card>
     )
 }

@@ -16,11 +16,11 @@ const SX: { male: number, female: number }[] = [
 const columns = [
     {
         dataIndex: "stat",
-        key: "stat",
+        key: "facts-stat",
     },
     {
         dataIndex: "value",
-        key: "value",
+        key: "facts-value",
     },
 ]
 
@@ -36,7 +36,7 @@ const Facts = ({ monster, img }) => {
             stat: "Skills",
             value: monster.skills
                 .map((skill) => (
-                    <Link to={`/skills/${skill}`} className="mr-2">
+                    <Link to={`/skills/${skill}`} className="mr-2" key={`link-${skill}`}>
                         {skill}
                     </Link>
                 ))
@@ -90,7 +90,7 @@ const Facts = ({ monster, img }) => {
             bordered={false}
             className="mb-3 ant-card--hide-thead"
         >
-            <Table dataSource={dataSource} columns={columns} pagination={false} />
+            <Table dataSource={dataSource} columns={columns} pagination={false} rowKey={(record) => record.stat} />
         </Card>
     )
 }
