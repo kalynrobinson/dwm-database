@@ -35,7 +35,7 @@ Start by taking a look at our issues. **Beginner issues** should only require a 
 
 Commit messages should follow [conventional commit](https://www.conventionalcommits.org/) standards so changelogs can be automatically generated.
 
-`yarn commit` will provide an interactive CLI for proper commit messages.
+`yarn commit` will provide an interactive CLI for proper commit messages. `yarn commit --retry` will retry your most recent failed commit.
 
 `git rebase` can be used to adjust your commits if they don't alraedy match the standards.
 
