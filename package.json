@@ -31,11 +31,13 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "docz:dev": "docz dev",
-        "docz:build": "docz build"
+        "docz:build": "docz build",
+        "commit": "git-cz"
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged"
+            "pre-commit": "lint-staged",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
     },
     "lint-staged": {
@@ -54,10 +56,18 @@
         "not op_mini all"
     ],
     "devDependencies": {
+        "commitizen": "^3.0.5",
+        "commitlint": "^7.2.1",
+        "cz-conventional-changelog": "2.1.0",
         "docz": "^0.12.15",
         "flow-bin": "^0.87.0",
         "husky": "^1.2.0",
         "lint-staged": "^8.1.0",
         "prettier": "^1.15.3"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }
