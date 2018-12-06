@@ -56,7 +56,12 @@ class Layout extends Component<Props, State> {
 
                     <Menu
                         theme="dark"
-                        selectedKeys={[location.pathname]}
+                        selectedKeys={[
+                            location.pathname
+                                .split("/")
+                                .slice(0, 2)
+                                .join("/"),
+                        ]}
                         mode="inline"
                     >
                         <Menu.Item key="/breeds">
