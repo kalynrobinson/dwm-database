@@ -1,6 +1,6 @@
-import React from "react"
-import { Route } from "react-router-dom"
-import { Transition, animated } from "react-spring"
+import React from "react";
+import { Route } from "react-router-dom";
+import { Transition, animated, config } from "react-spring";
 
 const AnimatedRoute = ({ children, slice = true }) => (
     <Route
@@ -9,16 +9,25 @@ const AnimatedRoute = ({ children, slice = true }) => (
                 native
                 items={location}
                 keys={({ pathname }) => pathname}
-                from={{ transform: "translateX(100%)" }}
-                enter={{ transform: "translateX(0)" }}
-                leave={{ transform: "translateX(100%)", pointerEvents: "none" }}
+                config={config.default}
+                from={{ opacity: 0, transform: "translateX(-100%)" }}
+                enter={{ opacity: 1, transform: "translateX(0)" }}
+                leave={{
+                    position: "absolute",
+                    opacity: 0,
+                    transform: "translateX(-100%)",
+                }}
             >
-                {(location) => (style) => <Container style={style}>{children(location)}</Container>}
+                {(location) => (style) => (
+                    <Container style={style}>{children(location)}</Container>
+                )}
             </Transition>
         )}
     />
-)
+);
 
-const Container = ({ children, style }) => <animated.div style={style}>{children}</animated.div>
+const Container = ({ children, style }) => (
+    <animated.div style={style}>{children}</animated.div>
+);
 
-export default AnimatedRoute
+export default AnimatedRoute;

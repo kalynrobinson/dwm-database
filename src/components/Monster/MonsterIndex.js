@@ -1,17 +1,17 @@
-import React, { Component } from "react"
-import { Link } from "react-router-dom"
-import { Table, Card } from "antd"
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Table } from "antd";
 
-import { FamilyAPI } from "api"
-import type { Monster } from "types"
-import MonsterAPI from "api/MonsterAPI"
+import { FamilyAPI } from "api";
+import type { Monster } from "types";
+import MonsterAPI from "api/MonsterAPI";
 
-const alphabetical = (a, b) => a.name.localeCompare(b.name)
+const alphabetical = (a, b) => a.name.localeCompare(b.name);
 
 class MonsterIndex extends Component<Props> {
     render() {
-        const monsters: Monster = Object.values(MonsterAPI.all())
-        const families: Family = FamilyAPI.keys()
+        const monsters: Monster[] = Object.values(MonsterAPI.all());
+        const families: Family = FamilyAPI.keys();
 
         const columns = [
             {
@@ -31,7 +31,9 @@ class MonsterIndex extends Component<Props> {
                     value: family,
                 })),
                 onFilter: (value, record) => record.family === value,
-                render: (family) => <Link to={`/families/${family}`}>{family}</Link>,
+                render: (family) => (
+                    <Link to={`/families/${family}`}>{family}</Link>
+                ),
             },
             {
                 title: "Skills",
@@ -45,18 +47,19 @@ class MonsterIndex extends Component<Props> {
                             </Link>
                         ))
                         .reduce((accu, elem) => {
-                            return accu === null ? [elem] : [...accu, ", ", elem]
+                            return accu === null
+                                ? [elem]
+                                : [...accu, ", ", elem];
                         }, null),
             },
-        ]
+        ];
 
         return (
             <div style={{ background: "#fff" }}>
                 <Table dataSource={monsters} columns={columns} rowKey="name" />
-                {/* monster index */}
             </div>
-        )
+        );
     }
 }
 
-export default MonsterIndex
+export default MonsterIndex;
