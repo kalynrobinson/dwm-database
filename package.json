@@ -17,6 +17,7 @@
     "author": "Kalyn Robinson <kalyndrobinson@gmail.com> (http://github.com/kalynrobinson)",
     "dependencies": {
         "antd": "^3.11.0",
+        "lodash.groupby": "^4.6.0",
         "react": "^16.6.3",
         "react-dom": "^16.6.3",
         "react-router-breadcrumbs-hoc": "^2.1.5",
