@@ -34,12 +34,19 @@ const GrowthRates = ({ monster }: Props) => {
             dataIndex: "stat",
             key: "growth-stat",
             className: "text-dark",
-            render: (value) => (
-                <Tooltip placement="topLeft" title={StatAPI.get(value).name}>
-                    <Icon type="question-circle" className="mr-2" />
-                    {value}
-                </Tooltip>
-            ),
+            render: (value) => {
+                const { name } = StatAPI.get(value);
+                return (
+                    <Tooltip placement="topLeft" title={name}>
+                        <Icon
+                            type="question-circle"
+                            className="mr-2"
+                            alt={name}
+                        />
+                        {value}
+                    </Tooltip>
+                );
+            },
         },
         {
             dataIndex: "value",
@@ -48,7 +55,7 @@ const GrowthRates = ({ monster }: Props) => {
     ];
 
     return (
-        <Card title="Growth Rates" bordered={false}>
+        <Card title="Growth Rates" bordered={false} className="mb-3">
             <Table
                 dataSource={growthRates}
                 pagination={false}

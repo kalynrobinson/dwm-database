@@ -1,18 +1,19 @@
-import React, { Component } from "react"
-import { Link, Redirect } from "react-router-dom"
-import { Row, Col } from "antd"
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { Row, Col } from "antd";
 
-import type { Monster } from "types"
-import { MonsterAPI, RecipeAPI } from "api"
-import Facts from "./Facts"
-import GrowthRates from "./GrowthRates"
-import Recipes from "./Recipes"
-import "./MonsterView.css"
+import type { Monster } from "types";
+import { MonsterAPI, RecipeAPI } from "api";
+import Facts from "./Facts";
+import GrowthRates from "./GrowthRates";
+import Recipes from "./Recipes";
+import "./MonsterView.css";
 
 /**
  * Alphabetical comparator, optionally using a data key to access a nested value.
  */
-const alphabetical = (a, b, key) => (key ? a[key].localeCompare(b[key]) : a.localeCompare(b))
+const alphabetical = (a, b, key) =>
+    key ? a[key].localeCompare(b[key]) : a.localeCompare(b);
 
 /**
  * Displays data for an individual monster.
@@ -28,41 +29,59 @@ class MonsterView extends Component<Props> {
      */
     getImage(monster) {
         try {
-            return require(`assets/images/breeds/${monster.name}.png`)
+            return require(`assets/images/breeds/${monster.name}.png`);
         } catch (_) {
-            return null
+            return null;
         }
     }
 
     render() {
-        const { match } = this.props
-        const monster: Monster = MonsterAPI.get(match.params.breed)
+        const { match } = this.props;
+        const monster: Monster = MonsterAPI.get(match.params.breed);
 
         /** redirect if monster doesn't exist */
-        if (!monster) return <Redirect push to="/404" />
+        if (!monster) return <Redirect push to="/404" />;
 
-        const img = this.getImage(monster)
-        const recipesTo = RecipeAPI.getTo(monster.name).sort((a, b) => alphabetical(a, b, "base"))
-        const recipesFrom = RecipeAPI.getFrom(monster.name).sort((a, b) => alphabetical(a, b, "offspring"))
+        const img = this.getImage(monster);
+        const recipesTo = RecipeAPI.getTo(monster.name).sort((a, b) =>
+            alphabetical(a, b, "base"),
+        );
+        const recipesFrom = RecipeAPI.getFrom(monster.name).sort((a, b) =>
+            alphabetical(a, b, "offspring"),
+        );
 
         return (
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                <Col xs={24} sm={12} md={8} lg={8} xl={6}>
+                <Col xs={24} sm={12} md={12} lg={8} xl={6}>
                     <Facts monster={monster} img={img} />
+                </Col>
 
+                <Col xs={24} sm={12} md={12} lg={6} xl={4}>
                     <GrowthRates monster={monster} />
                 </Col>
 
-                <Col xs={24} sm={12} md={9} lg={8} xl={8}>
-                    <Recipes recipes={recipesFrom} monster={monster} title="Recipes From" />
-                </Col>
+                <Col xs={24} sm={24} md={24} lg={10} xl={14}>
+                    <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                        <Col xs={24} sm={24} md={12} lg={24} xl={12}>
+                            <Recipes
+                                recipes={recipesFrom}
+                                monster={monster}
+                                title="Recipes From"
+                            />
+                        </Col>
 
-                <Col xs={24} sm={12} md={9} lg={8} xl={8}>
-                    <Recipes recipes={recipesTo} monster={monster} title="Recipes To" />
+                        <Col xs={24} sm={24} md={12} lg={24} xl={12}>
+                            <Recipes
+                                recipes={recipesTo}
+                                monster={monster}
+                                title="Recipes To"
+                            />
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
-        )
+        );
     }
 }
 
-export default MonsterView
+export default MonsterView;

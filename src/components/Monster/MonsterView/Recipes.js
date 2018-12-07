@@ -25,7 +25,7 @@ const Recipes = ({ recipes, monster, title }: Props) => {
     );
 
     return (
-        <Card title={title} bordered={false} className="ant-card--growth">
+        <Card title={title} bordered={false} className="mb-3">
             <Table
                 dataSource={recipes}
                 pagination={false}
@@ -64,6 +64,7 @@ const Recipes = ({ recipes, monster, title }: Props) => {
                 ]}
                 size="medium"
                 rowKey={(record) => `${record.base}-${record.mate}`}
+                className="ant-table--compact-xs"
             />
         </Card>
     );

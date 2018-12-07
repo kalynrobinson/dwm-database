@@ -5,3 +5,21 @@
 .icon.icon--woman {
     color: #ff69b4;
 }
+
+/**
+ * Hide sort icon and shrink padding so table doesn't bleed out of div
+ */
+.ant-table--compact-xs
+    .ant-table-thead
+    > tr
+    > th.ant-table-column-has-actions.ant-table-column-has-sorters.ant-table-column-has-filters {
+    padding: 0.75rem 2.25rem 0.75rem 0.75rem !important;
+}
+
+.ant-table--compact-xs .ant-table-thead > tr > th .ant-table-column-sorter {
+    display: none;
+}
+
+.ant-table {
+    overflow: auto !important;
+}
