@@ -6,14 +6,16 @@ import { StatAPI } from "api";
 import type { Stat } from "types";
 import "./Facts.css";
 
-const SX: { male: number, female: number }[] = [
+type Probability = { male: number, female: number };
+const SX: Probability[] = [
     { male: 100, female: 0 },
     { male: 90, female: 10 },
     { male: 50, female: 50 },
     { male: 83, female: 17 },
 ];
 
-const columns = [
+type Column = { dataIndex: string, key: string, className?: string };
+const columns: Column = [
     {
         dataIndex: "stat",
         key: "facts-stat",
@@ -26,7 +28,7 @@ const columns = [
 ];
 
 const Facts = ({ monster, img }) => {
-    const sxProb = SX[monster.stats.SX];
+    const sxProb: Probability = SX[monster.stats.SX];
 
     const dataSource = [
         {
@@ -76,38 +78,48 @@ const Facts = ({ monster, img }) => {
         },
         {
             stat: "Location",
-            value: (monster.locations || []).map((loc) => (
-                <span key={`location-${loc}`} className="mr-2">
-                    {loc}
-                </span>
-            )),
+            value:
+                monster.locations && monster.locations.length
+                    ? monster.locations.map((loc) => (
+                          <span key={`location-${loc}`} className="mr-2">
+                              {loc}
+                          </span>
+                      ))
+                    : "Unknown",
         },
     ];
 
-    const ME: Stat = StatAPI.get("ME");
-    const FL: Stat = StatAPI.get("FL");
+    const { ME, FL } = monster.stats;
+    const metalSlime: Stat = ME && StatAPI.get("ME");
+    const flying: Stat = FL && StatAPI.get("FL");
 
     return (
         <Card
             title={
                 <Fragment>
                     <span className="mr-2">{monster.name}</span>
-                    <Tooltip
-                        placement="topLeft"
-                        title={`${ME.name} - ${ME.description}`}
-                    >
-                        <Icon
-                            type="gold"
-                            className="mr-2"
-                            alt="MetalSlime Family"
-                        />
-                    </Tooltip>
-                    <Tooltip
-                        placement="topLeft"
-                        title={`${FL.name} - ${FL.description}`}
-                    >
-                        <Icon type="cloud" alt="Flying Monster" />
-                    </Tooltip>
+                    {!!ME && (
+                        <Tooltip
+                            placement="topLeft"
+                            title={`${metalSlime.name} - ${
+                                metalSlime.description
+                            }`}
+                        >
+                            <Icon
+                                type="gold"
+                                className="mr-2"
+                                alt="MetalSlime Family"
+                            />
+                        </Tooltip>
+                    )}
+                    {!!FL && (
+                        <Tooltip
+                            placement="topLeft"
+                            title={`${flying.name} - ${flying.description}`}
+                        >
+                            <Icon type="cloud" alt="Flying Monster" />
+                        </Tooltip>
+                    )}
                 </Fragment>
             }
             bordered={false}
