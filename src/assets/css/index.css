@@ -10,16 +10,21 @@
     padding: 0 !important;
 }
 
+.mx-5 {
+    margin-left: 1.5rem !important;
+    margin-right: 1.5rem !important;
+}
+
 .mt-3 {
     margin-top: 1rem !important;
 }
 
-.mr-2 {
-    margin-right: 0.5rem !important;
-}
-
 .mt-2 {
     margin-top: 0.5rem !important;
+}
+
+.mr-2 {
+    margin-right: 0.5rem !important;
 }
 
 .sr-only {
@@ -35,4 +40,12 @@
 
 .text-dark {
     color: rgba(0, 0, 0, 0.85);
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.height-full {
+    height: 100%;
 }
