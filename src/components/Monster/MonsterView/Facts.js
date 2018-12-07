@@ -37,15 +37,15 @@ const Facts = ({ monster, img }) => {
         },
         {
             stat: "Skills",
-            value: monster.skills.map((skill) => (
-                <Link
-                    to={`/skills/${skill}`}
-                    className="mr-2"
-                    key={`link-${skill}`}
-                >
-                    {skill}
-                </Link>
-            )),
+            value: monster.skills
+                .map((skill) => (
+                    <Link to={`/skills/${skill}`} key={`link-${skill}`}>
+                        {skill}
+                    </Link>
+                ))
+                .reduce((accu, elem) => {
+                    return accu === null ? [elem] : [...accu, " / ", elem];
+                }, null),
         },
         {
             stat: "Sex",
@@ -60,7 +60,7 @@ const Facts = ({ monster, img }) => {
                         />
                         &nbsp;{sxProb.male}%
                     </span>
-                    &nbsp;/&nbsp;
+                    {` / `}
                     <span>
                         <Icon
                             type="woman"
