@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Table } from "antd";
 
+import { alphabetical } from "utilities/sorters";
+
 type Props = {
     recipes: Recipe[],
     /** Fallback for null offspring -- assume offspring is current monster */
@@ -33,7 +35,7 @@ const Recipes = ({ recipes, monster, title }: Props) => {
                     {
                         title: "Pedigree",
                         dataIndex: "base",
-                        sorter: (a, b) => alphabetical(a, b, "base"),
+                        sorter: (a, b) => alphabetical(a.base, b.base),
                         filters: baseFilters,
                         onFilter: (value, record) => record.base === value,
                         render: (value) => (
@@ -44,7 +46,7 @@ const Recipes = ({ recipes, monster, title }: Props) => {
                         title: "Mate",
                         dataIndex: "mate",
                         key: "mate",
-                        sorter: (a, b) => alphabetical(a, b, "mate"),
+                        sorter: (a, b) => alphabetical(a.mate, b.mate),
                         filters: mateFilters,
                         onFilter: (value, record) => record.mate === value,
                         render: (value) => (
@@ -54,7 +56,8 @@ const Recipes = ({ recipes, monster, title }: Props) => {
                     {
                         title: "Offspring",
                         dataIndex: "offspring",
-                        sorter: (a, b) => alphabetical(a, b, "offspring"),
+                        sorter: (a, b) =>
+                            alphabetical(a.offspring, b.offspring),
                         filters: offspringFilters,
                         onFilter: (value, record) => record.offspring === value,
                         render: (value) => (
@@ -75,9 +78,6 @@ const Recipes = ({ recipes, monster, title }: Props) => {
  */
 const LinkCell = ({ value, name }: { value: strng, name: string }) =>
     value === name ? value : <Link to={`/breeds/${value}`}>{value}</Link>;
-
-const alphabetical = (a, b, key) =>
-    key ? a[key].localeCompare(b[key]) : a.localeCompare(b);
 
 /**
  * @param  {Recipe[]} recipes
