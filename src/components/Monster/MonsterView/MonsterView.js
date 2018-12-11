@@ -2,18 +2,14 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Row, Col } from "antd";
 
-import type { Monster } from "types";
 import { MonsterAPI, RecipeAPI } from "api";
+import type { Monster } from "types";
+import { alphabetical } from "utilities/sorters";
+
 import Facts from "./Facts";
 import GrowthRates from "./GrowthRates";
 import Recipes from "./Recipes";
 import "./MonsterView.css";
-
-/**
- * Alphabetical comparator, optionally using a data key to access a nested value.
- */
-const alphabetical = (a, b, key) =>
-    key ? a[key].localeCompare(b[key]) : a.localeCompare(b);
 
 /**
  * Displays data for an individual monster.
@@ -44,10 +40,10 @@ class MonsterView extends Component<Props> {
 
         const img = this.getImage(monster);
         const recipesTo = RecipeAPI.getTo(monster.name).sort((a, b) =>
-            alphabetical(a, b, "base"),
+            alphabetical(a.base, b.base),
         );
         const recipesFrom = RecipeAPI.getFrom(monster.name).sort((a, b) =>
-            alphabetical(a, b, "offspring"),
+            alphabetical(a.offspring, b.offspring),
         );
 
         return (
@@ -57,7 +53,7 @@ class MonsterView extends Component<Props> {
                 </Col>
 
                 <Col xs={24} sm={12} md={12} lg={6} xl={4}>
-                    <GrowthRates monster={monster} />
+                    <GrowthRates stats={monster.stats} />
                 </Col>
 
                 <Col xs={24} sm={24} md={24} lg={10} xl={14}>
