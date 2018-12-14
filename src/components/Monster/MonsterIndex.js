@@ -4,9 +4,9 @@ import { Table } from "antd";
 
 import { FamilyAPI } from "api";
 import type { Monster } from "types";
-import MonsterAPI from "api/MonsterAPI";
+import { alphabetical } from "utilities/sorters";
 
-const alphabetical = (a, b) => a.name.localeCompare(b.name);
+import MonsterAPI from "api/MonsterAPI";
 
 const MonsterIndex = () => {
     const monsters: Monster[] = Object.values(MonsterAPI.all());
@@ -17,14 +17,14 @@ const MonsterIndex = () => {
             title: "Name",
             dataIndex: "name",
             key: "name",
-            sorter: alphabetical,
+            sorter: (a, b) => alphabetical(a.name, b.name),
             render: (name) => <Link to={`/breeds/${name}`}>{name}</Link>,
         },
         {
             title: "Family",
             dataIndex: "family",
             key: "family",
-            sorter: alphabetical,
+            sorter: (a, b) => alphabetical(a.name, b.name),
             filters: families.map((family) => ({
                 text: family,
                 value: family,

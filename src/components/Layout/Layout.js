@@ -82,8 +82,8 @@ class Layout extends Component<Props, State> {
                                 <span>Skills</span>
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="/calc">
-                            <Link to="/calc">
+                        <Menu.Item key="/calculator">
+                            <Link to="/calculator">
                                 <Icon type="experiment" />
                                 <span>Breeding Calculator</span>
                             </Link>

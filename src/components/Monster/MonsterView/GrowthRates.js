@@ -57,7 +57,11 @@ const GrowthRates = ({ stats, title }: Props) => {
     ];
 
     return (
-        <Card title={title} bordered={false} className="mb-3">
+        <Card
+            title={title}
+            bordered={false}
+            className="mb-3 ant-card--no-padding"
+        >
             <Table
                 dataSource={growthRates}
                 pagination={false}
