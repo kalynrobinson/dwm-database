@@ -10,6 +10,10 @@
     padding: 0 !important;
 }
 
+.pt-3 {
+    padding-top: 1rem !important;
+}
+
 .mx-5 {
     margin-left: 1.5rem !important;
     margin-right: 1.5rem !important;
@@ -28,7 +32,7 @@
 }
 
 .sr-only {
-    position: absolute;
+    position: absolute !important;
     width: 1px;
     height: 1px;
     padding: 0;
@@ -48,4 +52,8 @@
 
 .height-full {
     height: 100%;
+}
+
+.text-muted {
+    color: #a2a2a2;
 }

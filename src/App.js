@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { AnimatedRoute } from "components/common/Animation";
+import CalculatorContainer from "components/Calculator";
 import MonsterContainer from "components/Monster";
 import FamilyContainer from "components/Family";
 import Layout from "components/Layout";
@@ -35,6 +36,10 @@ const Main = (props) => (
                     <Route
                         path="/families"
                         render={(props) => <FamilyContainer />}
+                    />
+                    <Route
+                        path="/calculator"
+                        render={(props) => <CalculatorContainer />}
                     />
                 </Switch>
             )}

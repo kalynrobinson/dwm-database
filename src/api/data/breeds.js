@@ -4276,7 +4276,7 @@ const breeds = {
         skills: ["Firebal", "Meditate", "BeDragon"],
     },
     DracoLord2: {
-        name: "DracoLord",
+        name: "DracoLord2",
 
         family: "BOSS",
         stats: {
@@ -4428,7 +4428,7 @@ const breeds = {
         skills: ["Blaze", "Bang", "Bolt"],
     },
     Mirudraas2: {
-        name: "Mirudraas",
+        name: "Mirudraas2",
 
         family: "BOSS",
         stats: {
@@ -4485,7 +4485,7 @@ const breeds = {
         skills: ["Hellblast", "BigBang", "TatsuCall"],
     },
     DeathMore2: {
-        name: "DeathMore",
+        name: "DeathMore2",
 
         family: "BOSS",
         stats: {
@@ -4504,7 +4504,7 @@ const breeds = {
         skills: ["Ramming", "FireAir", "UltraDown"],
     },
     DeathMore3: {
-        name: "DeathMore",
+        name: "DeathMore3",
 
         family: "BOSS",
         stats: {
@@ -4541,6 +4541,6 @@ const breeds = {
         },
         skills: ["Bolt", "FireAir", "FrigidAir"],
     },
-}
+};
 
-export default breeds
+export default breeds;
