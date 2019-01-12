@@ -5,6 +5,7 @@ import { AnimatedRoute } from "components/common/Animation";
 import CalculatorContainer from "components/Calculator";
 import MonsterContainer from "components/Monster";
 import FamilyContainer from "components/Family";
+import ResistanceContainer from "components/Resistance";
 import Layout from "components/Layout";
 
 class App extends Component {
@@ -40,6 +41,10 @@ const Main = (props) => (
                     <Route
                         path="/calculator"
                         render={(props) => <CalculatorContainer />}
+                    />
+                    <Route
+                        path="/resistances"
+                        render={(props) => <ResistanceContainer />}
                     />
                 </Switch>
             )}
