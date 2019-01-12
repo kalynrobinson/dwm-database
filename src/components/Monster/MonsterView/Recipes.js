@@ -27,7 +27,11 @@ const Recipes = ({ recipes, monster, title }: Props) => {
     );
 
     return (
-        <Card title={title} bordered={false} className="mb-3">
+        <Card
+            title={title}
+            bordered={false}
+            className="ant-card--no-padding mb-3"
+        >
             <Table
                 dataSource={recipes}
                 pagination={false}

@@ -123,7 +123,7 @@ const Facts = ({ monster, img }) => {
                 </Fragment>
             }
             bordered={false}
-            className="mb-3"
+            className="ant-card--no-padding mb-3"
         >
             <Table
                 dataSource={dataSource}
