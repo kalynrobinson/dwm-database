@@ -55,42 +55,6 @@ export class BreedingCalculator extends Component<Props, State> {
             <Fragment>
                 <Row gutter={16}>
                     <Col xs={24} sm={24} md={16} lg={16} xl={12}>
-                        <Collapse bordered={false} defaultActiveKey={[]}>
-                            <Collapse.Panel
-                                header="Notes on breeding"
-                                key="1"
-                                className="mb-3"
-                            >
-                                <p>
-                                    If a breeding combination matches two or
-                                    more recipes, the game prioritizes the
-                                    recipes in the following order:
-                                </p>
-                                <ol>
-                                    <li>Species + Species</li>
-                                    <li>Species + Family</li>
-                                    <li>Family + Species</li>
-                                    <li>Family + Family</li>
-                                </ol>
-                                <p>
-                                    If a breeding combination has no specific
-                                    recipes and both monsters are the same
-                                    family, the offspring will always be the
-                                    pedigree.
-                                </p>
-                                <p>
-                                    Additionally, some recipes require a certain
-                                    number of +s, e.g. Dragon + Dragon =
-                                    GreatDrak. This will be noted in the
-                                    calculator results.
-                                </p>
-                            </Collapse.Panel>
-                        </Collapse>
-                    </Col>
-                </Row>
-
-                <Row gutter={16}>
-                    <Col xs={24} sm={24} md={16} lg={16} xl={12}>
                         <Card title="Breeding Calculator" className="mb-3">
                             <Form layout="inline" onSubmit={this.handleSubmit}>
                                 <Form.Item
@@ -164,6 +128,38 @@ export class BreedingCalculator extends Component<Props, State> {
                                 </Form.Item>
                             </Form>
                         </Card>
+
+                        <Collapse bordered={false} defaultActiveKey={[]}>
+                            <Collapse.Panel
+                                header="Notes on breeding"
+                                key="1"
+                                className="mb-3"
+                            >
+                                <p>
+                                    If a breeding combination matches two or
+                                    more recipes, the game prioritizes the
+                                    recipes in the following order:
+                                </p>
+                                <ol>
+                                    <li>Species + Species</li>
+                                    <li>Species + Family</li>
+                                    <li>Family + Species</li>
+                                    <li>Family + Family</li>
+                                </ol>
+                                <p>
+                                    If a breeding combination has no specific
+                                    recipes and both monsters are the same
+                                    family, the offspring will always be the
+                                    pedigree.
+                                </p>
+                                <p>
+                                    Additionally, some recipes require a certain
+                                    number of +s, e.g. Dragon + Dragon =
+                                    GreatDrak. This will be noted in the
+                                    calculator results.
+                                </p>
+                            </Collapse.Panel>
+                        </Collapse>
                     </Col>
 
                     <Col xs={24} sm={24} md={8} lg={8} xl={8}>
