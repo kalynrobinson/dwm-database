@@ -57,3 +57,7 @@
 .text-muted {
     color: #a2a2a2;
 }
+
+.ant-table--card .ant-pagination.ant-table-pagination {
+    margin: 1rem;
+}
