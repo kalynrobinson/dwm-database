@@ -12,7 +12,6 @@ type Props = {
 const FamilyCard = ({ monsters, title }: Props) => (
     <Card title={title} bordered={false} className="height-full">
         <List
-            className="mt-3"
             grid={{
                 gutter: 8,
                 xs: 2,
@@ -26,9 +25,7 @@ const FamilyCard = ({ monsters, title }: Props) => (
             pagination={false}
             renderItem={({ name }: Monster) => (
                 <List.Item>
-                    <Link to={`/breeds/${name}`} className="mx-5">
-                        {name}
-                    </Link>
+                    <Link to={`/breeds/${name}`}>{name}</Link>
                 </List.Item>
             )}
         />
