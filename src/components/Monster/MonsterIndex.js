@@ -24,7 +24,7 @@ const MonsterIndex = () => {
             title: "Family",
             dataIndex: "family",
             key: "family",
-            sorter: (a, b) => alphabetical(a.name, b.name),
+            sorter: (a, b) => alphabetical(a.family, b.family),
             filters: families.map((family) => ({
                 text: family,
                 value: family,
@@ -53,7 +53,12 @@ const MonsterIndex = () => {
 
     return (
         <div style={{ background: "#fff" }}>
-            <Table dataSource={monsters} columns={columns} rowKey="name" />
+            <Table
+                dataSource={monsters}
+                columns={columns}
+                rowKey="name"
+                className="ant-table--card"
+            />
         </div>
     );
 };
