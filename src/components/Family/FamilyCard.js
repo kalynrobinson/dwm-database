@@ -2,15 +2,15 @@ import React from "react";
 import { Card, List } from "antd";
 import { Link } from "react-router-dom";
 
-import type { Monster } from "types";
+import type { CommonProps, Monster } from "types";
 
-type Props = {
+type Props = CommonProps & {
     monsters: Monster[],
     title: React.Node,
 };
 
-const FamilyCard = ({ monsters, title }: Props) => (
-    <Card title={title} bordered={false} className="height-full">
+const FamilyCard = ({ monsters, title, className }: Props) => (
+    <Card title={title} bordered={false} className={className}>
         <List
             grid={{
                 gutter: 8,
