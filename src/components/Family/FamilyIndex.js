@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Col, Icon, Row } from "antd";
+import sortBy from "lodash.sortby";
 
 import type { Monster } from "types";
 import { FamilyAPI, MonsterAPI } from "api";
@@ -36,7 +37,7 @@ const FamilyIndex = ({ match }) => {
                                 <span className="text-dark">{family}</span>
                             </Link>
                         }
-                        monsters={monsters[family]}
+                        monsters={sortBy(monsters[family], "name")}
                     />
                 </Col>
             ))}
