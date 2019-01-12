@@ -90,6 +90,23 @@ class Layout extends Component<Props, State> {
                                     <span>Breeding Calculator</span>
                                 </Link>
                             </Menu.Item>
+
+                            <Menu.SubMenu
+                                key="miscellaneous"
+                                title={
+                                    <span>
+                                        <Icon type="ellipsis" />
+                                        <span>Miscellaneous</span>
+                                    </span>
+                                }
+                            >
+                                <Menu.Item key="/resistances">
+                                    <Link to="/resistances">
+                                        <Icon type="pie-chart" />
+                                        <span>Resistances</span>
+                                    </Link>
+                                </Menu.Item>
+                            </Menu.SubMenu>
                         </Menu>
                     </Sider>
 
