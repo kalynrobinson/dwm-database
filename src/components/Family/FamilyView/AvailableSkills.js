@@ -29,13 +29,13 @@ const AvailableSkills = ({ monsters }: Props) => {
     skills = sortBy(skills, ["monsters.length", "name"]);
 
     return (
-        <Card title="Available Skills">
+        <Card title="Available Skills" className="ant-card--no-padding">
             <Table
                 dataSource={skills}
                 columns={columns}
                 rowKey="name"
                 size="medium"
-                className="ant-table--margin"
+                className="ant-table--card"
             />
         </Card>
     );

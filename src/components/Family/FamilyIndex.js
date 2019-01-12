@@ -38,6 +38,7 @@ const FamilyIndex = ({ match }) => {
                             </Link>
                         }
                         monsters={sortBy(monsters[family], "name")}
+                        className="height-full"
                     />
                 </Col>
             ))}
